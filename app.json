@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "Etkin Kampüs",
+    "slug": "Etkin Kampüs",
+    "version": "1.0.0",
+    "assetBundlePatterns": ["**/*"],
+    "extra": {
+      "eas": {
+        "projectId": "bdc80da4-8623-42a8-937b-4d18e31e4202"
+      }
+    }
+  }
+}
