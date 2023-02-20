@@ -15,13 +15,12 @@
     "preview": {
       "distribution": "internal"
     },
+    "preview2": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "production": {}
   },
-  "submit": {
-    "production": {
-      "android": {
-        "serviceAccountKeyPath": "../ispanel-playstore/serviceaccountkey/pc-api-8728546704182771598-254-17a6bc11a106.json"
-      }
-    }
-  }
+  "submit": {}
 }

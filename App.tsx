@@ -15,7 +15,6 @@ export default function App() {
   const webViewRef = useRef<WebView>();
 
   const [showBackButton, setShowBackButton] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
   const [refresherEnabled, setEnableRefresher] = useState(true);
 
   // opens app settings
@@ -32,18 +31,7 @@ export default function App() {
   };
 
   // manage back button availability, display it when not in login or main page
-  const checkBackButtonAvailability = (navState: WebViewNavigation): Boolean =>
-    navState &&
-    navState.canGoBack &&
-    navState.url !== "https://lim10medya.com/ispanel/login/login" &&
-    navState.url !== "https://lim10medya.com/ispanel/login" &&
-    navState.url !== "https://lim10medya.com/ispanel/anasayfa/index" &&
-    navState.url !== "https://lim10medya.com/ispanel/login/index" &&
-    navState.url !== "https://lim10medya.com/ispanel/#!" &&
-    navState.url !== "https://lim10medya.com/ispanel/anasayfa" &&
-    navState.url !== "https://lim10medya.com/ispanel/anasayfa#!" &&
-    navState.url !== "https://lim10medya.com/ispanel/anasayfa/index#" &&
-    navState.url !== "https://lim10medya.com/ispanel/anasayfa/index#!";
+  const checkBackButtonAvailability = (navState: WebViewNavigation): Boolean => navState && navState.canGoBack && navState.url !== "https://akademi.etkinkampus.com/login";
 
   // onNavigationStateChange, manage backbutton availability, and
   // set statusbar to light text everytime state changes
@@ -110,7 +98,7 @@ export default function App() {
       {PLATFORM === "ios" ? (
         <WebView
           pullToRefreshEnabled
-          source={{ uri: "https://lim10medya.com/ispanel" }}
+          source={{ uri: "https://akademi.etkinkampus.com/login" }}
           ref={webViewRef}
           onNavigationStateChange={(navState) => handleNavigatioStateChange(navState)}
           allowsBackForwardNavigationGestures // only works with iOS
@@ -119,7 +107,7 @@ export default function App() {
           javaScriptCanOpenWindowsAutomatically
           renderLoading={() => (
             <View style={styles.webViewLoadingContainer}>
-              <ActivityIndicator style={styles.webviewLoading} size="large" color="#FFC200" />
+              <ActivityIndicator style={styles.webviewLoading} size="large" color="#FF7300" />
             </View>
           )}
           startInLoadingState
@@ -130,19 +118,20 @@ export default function App() {
           contentContainerStyle={styles.container}
           refreshControl={
             <RefreshControl
-              refreshing={refreshing}
+              tintColor="#FF7300"
+              colors={["white"]}
+              progressBackgroundColor="#FF7300"
+              refreshing={false}
               enabled={refresherEnabled}
               onRefresh={() => {
                 webViewRef.current.reload();
-                setRefreshing(true);
-                setTimeout(() => setRefreshing(false), 2000);
               }}
             />
           }
         >
-          <StatusBar style="light" backgroundColor="black" />
+          <StatusBar style="light" backgroundColor="#FF7300" />
           <WebView
-            source={{ uri: "https://lim10medya.com/ispanel" }}
+            source={{ uri: "https://akademi.etkinkampus.com/login" }}
             ref={webViewRef}
             style={styles.webview}
             onNavigationStateChange={(navState) => handleNavigatioStateChange(navState)}
@@ -153,7 +142,7 @@ export default function App() {
             onScroll={handleScroll}
             renderLoading={() => (
               <View style={styles.webViewLoadingContainer}>
-                <ActivityIndicator style={styles.webviewLoading} size="large" color="#FFC200" />
+                <ActivityIndicator style={styles.webviewLoading} size="large" color="#ffffff" />
               </View>
             )}
             startInLoadingState
@@ -172,38 +161,36 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   webview: {
     flex: 1,
     zIndex: 1,
     marginTop: getStatusBarHeight(),
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   webViewLoadingContainer: {
-    position: "absolute",
-    height: Dimensions.get("window").height,
-    width: Dimensions.get("window").width,
-    backgroundColor: "black",
-    justifyContent: "center",
-    alignItems: "center",
     zIndex: 3,
+    width: width,
+    height: height,
+
+    justifyContent: "center",
+
+    backgroundColor: "#FF7300",
   },
   webviewLoading: {
-    position: "absolute",
-    bottom: Dimensions.get("window").height / 2 - 20,
-    left: Dimensions.get("window").width / 2 - 20,
-
     zIndex: 4,
+    position: "absolute",
+    alignSelf: "center",
   },
   buttonWrapper: {
     zIndex: 2,
     position: "absolute",
-    bottom: 30,
-    left: 30,
+    bottom: 50,
+    left: 20,
 
     borderRadius: 20,
-    shadowColor: "black",
+    shadowColor: "#FFC200",
 
     // ios shadow
     shadowOffset: {

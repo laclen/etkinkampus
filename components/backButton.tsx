@@ -13,16 +13,16 @@ export default BackButton;
 
 const styles = StyleSheet.create({
   button: {
-    height: 48,
-    width: 48,
+    height: 40,
+    width: 40,
 
     alignItems: "center",
     justifyContent: "center",
 
     borderRadius: 48 / 2,
-    backgroundColor: "black",
-    shadowColor: "black",
+    backgroundColor: "#FF7300",
+    shadowColor: "#FF7300",
 
-    elevation: 16,
+    elevation: 15,
   },
 });
